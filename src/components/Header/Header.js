@@ -5,7 +5,6 @@ import './Header.css';
 
 const header = props => {
   const { toggleSidedrawer, showSidedrawer } = props;
-  console.log(props)
 
   return (
     <header className="header">
