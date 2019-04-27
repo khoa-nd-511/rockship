@@ -1,0 +1,64 @@
+.header {
+  padding: 1rem 0;
+  background: #007bff;
+  color: white;
+}
+
+.brand_hamburger {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.hamburger {
+  height: 30px;
+  width: 30px;
+  position: relative;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.bar {
+  height: 3px;
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.bar.bars,
+.bar:after,
+.bar:before {
+  background: #fff;
+  transition: all 300ms ease-in;
+}
+
+.bar:after,
+.bar:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.bar:before {
+  top: -9px;
+}
+
+.bar:after {
+  top: 9px;
+}
+
+.bar.cross {
+  background: transparent;
+}
+
+.bar.cross::after {
+  top: 0px;
+  transform: rotate(225deg);
+}
+
+.bar.cross::before {
+  top: 0px;
+  transform: rotate(135deg);
+}

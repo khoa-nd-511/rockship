@@ -1,0 +1,27 @@
+.sidedrawer {
+  position: absolute;
+  width: 300px;
+  height: calc(100% - 72px);
+  background: #fff;
+  padding-top: 2rem;
+  transition: all 300ms ease-in;
+  z-index: 100;
+}
+
+.sidedrawer.close {
+  transform: translateX(-300px);
+}
+
+.sidedrawer.open {
+  transform: translateX(0);
+}
+
+a.navLink:hover {
+  text-decoration: none;
+}
+
+.navLink_item:hover,
+.navLink:active > .navLink_item,
+.navLink.active > .navLink_item {
+  background: rgba(0, 0, 0, 0.1);
+}
