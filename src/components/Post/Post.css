@@ -1,0 +1,33 @@
+.post {
+  width: 18rem;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+  transition: all 100ms ease-in;
+}
+
+.post:hover {
+  transform: translate(0, -1px);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); 
+}
+
+.chip {
+  display: inline-block;
+  height: 32px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 32px;
+  color: rgba(0,0,0,0.6);
+  padding: 0 12px;
+  border-radius: 16px;
+  background-color: #e4e4e4;
+}
+
+.chip > img {
+  margin: 0 8px 0 -12px;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+}
+
+.chip > a {
+  text-decoration: none;
+}
