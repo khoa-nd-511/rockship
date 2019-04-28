@@ -2,6 +2,10 @@
   padding: 1rem 0;
   background: #007bff;
   color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 90;
 }
 
 .brand_hamburger {

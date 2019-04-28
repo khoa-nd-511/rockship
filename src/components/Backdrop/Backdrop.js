@@ -2,10 +2,12 @@ import React from 'react'
 
 const backdrop = props => {
   const styles = {
-    position: 'absolute',
+    position: 'fixed',
     width: '100%',
     height: '100%',
-    top: 72, left: 0,
+    top: 0,
+    bottom: 0,
+    left: 0,
     zIndex: 99,
     backgroundColor: 'rgba(0, 0, 0, 0.2)'
   };

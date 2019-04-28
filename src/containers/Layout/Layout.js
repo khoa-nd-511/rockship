@@ -28,15 +28,15 @@ export class Layout extends Component {
     return (
       <Fragment>
         <Header toggleSidedrawer={this.showSidedrawerHandler} showSidedrawer={showSidedrawer} />
-        <div style={{ marginTop: '2rem' }}>
+        <div style={{ marginTop: 'calc(2rem + 72px)' }}>
           <Container>
             <Row>
               {this.props.children}
             </Row>
           </Container>
-          <Sidedrawer showSidedrawer={showSidedrawer} closeSidedrawerHandler={this.closeSidedrawerHandler} />
-          <Backdrop showSidedrawer={showSidedrawer} clodeSidedrawer={this.closeSidedrawerHandler} />
         </div>
+        <Sidedrawer showSidedrawer={showSidedrawer} closeSidedrawerHandler={this.closeSidedrawerHandler} />
+        <Backdrop showSidedrawer={showSidedrawer} clodeSidedrawer={this.closeSidedrawerHandler} />
       </Fragment>
     )
   }
