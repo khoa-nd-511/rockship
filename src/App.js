@@ -5,6 +5,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Layout from './containers/Layout/Layout';
 import Dashboard from './containers/Dashboard/Dashboard';
 import AddPost from './containers/AddPost/AddPost';
+import Show from './containers/Show/Show';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Layout>
         <Switch>
           <Route exact path="/add" component={AddPost} />
+          <Route exact path="/show" component={Show} />
           <Route exact path="/" component={Dashboard} />
         </Switch>
       </Layout>
