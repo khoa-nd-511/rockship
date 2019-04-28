@@ -16,7 +16,8 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.0",
     "react-streams": "^13.6.6",
-    "rxjs": "^6.5.1"
+    "rxjs": "^6.5.1",
+    "sweetalert-react": "^0.4.11"
   },
   "scripts": {
     "start": "react-scripts start",

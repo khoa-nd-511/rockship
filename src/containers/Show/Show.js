@@ -1,17 +1,10 @@
 import React, { Fragment } from 'react';
-import renderHtml from 'react-render-html';
 import { pipe } from 'rxjs';
 import { ajax } from "rxjs/ajax"
 import { map, startWith, switchMap } from "rxjs/operators"
 import { streamProps } from 'react-streams';
-import { Col, Button } from 'react-bootstrap';
-
-const paper = {
-  boxShadow: '1px 1px 1px rgba(0,0,0,0.1)',
-  borderRadius: '0.5rem',
-  border: '1px solid rgba(0,0,0,0.1)',
-  padding: '0.8rem',
-}
+import { Col } from 'react-bootstrap';
+import PostDisplay from './PostDisplay/PostDisplay';
 
 const fetchSinglePost = pipe(
   switchMap(({ postId }) => ajax(`https://rockship-adbe4.firebaseio.com/posts/${postId}.json`).pipe(
@@ -30,7 +23,7 @@ const fetchSinglePost = pipe(
     })
   )),
   startWith({ post: null, message: 'Fetching ...' })
-)
+);
 
 const Show = streamProps(fetchSinglePost);
 
@@ -43,30 +36,7 @@ export default () => {
         <Fragment>
           {message !== '' && <Col xs={12}>{message}</Col>}
           {post && (
-            <Fragment>
-              <Col xs={12}>
-                <div style={paper}>
-                  <h2>{post.title}</h2>
-                </div>
-              </Col>
-              <Col xs={12} lg={8} className="mt-3">
-                <div style={paper}>{renderHtml(post.body)}</div>
-              </Col>
-              <Col xs={12} lg={4} className="mt-3 ml-auto">
-                <div style={paper}>
-                  <h4><b>Author</b></h4>
-                  <p>{post.author.displayName}</p>
-                </div>
-              </Col>
-              <Col xs={12} style={{ padding: '0.8rem'}}>
-                <Button variant="success" block className="mt-3">
-                  Edit
-                </Button>
-                <Button variant="danger" block className="mt-3">
-                  Delete
-                </Button>
-              </Col>
-            </Fragment>
+            <PostDisplay title={post.title} body={post.body} authorName={post.author.displayName} />
           )}
         </Fragment>
       )}
