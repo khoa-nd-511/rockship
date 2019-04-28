@@ -1,5 +1,6 @@
 // Import FirebaseAuth and firebase.
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -38,10 +39,12 @@ class Auth extends Component {
   };
 
   logoutHandler = () => {
-    firebase.auth().signOut();
-    this.setState({ user: null, loggedIn: false })
     localStorage.removeItem('currentUser');
     localStorage.removeItem('firebaseui::rememberedAccounts');
+
+    firebase.auth().signOut();
+    this.setState({ user: null, loggedIn: false })
+    this.props.history.push('/');
   }
 
   componentDidMount = () => {
@@ -76,4 +79,4 @@ class Auth extends Component {
   }
 }
 
-export default Auth
+export default withRouter(Auth)

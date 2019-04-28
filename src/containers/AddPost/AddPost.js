@@ -14,6 +14,13 @@ export class AddPost extends Component {
 
   bodyChangedHandler = (html) => {
     this.setState({ body: html })
+  };
+
+  componentWillMount = () => {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser) {
+      this.props.history.push('/')
+    }
   }
 
   render() {
