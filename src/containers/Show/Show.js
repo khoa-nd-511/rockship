@@ -4,7 +4,7 @@ import { pipe } from 'rxjs';
 import { ajax } from "rxjs/ajax"
 import { map, startWith, switchMap } from "rxjs/operators"
 import { streamProps } from 'react-streams';
-import { Col } from 'react-bootstrap';
+import { Col, Button } from 'react-bootstrap';
 
 const paper = {
   boxShadow: '1px 1px 1px rgba(0,0,0,0.1)',
@@ -57,6 +57,14 @@ export default () => {
                   <h4><b>Author</b></h4>
                   <p>{post.author.displayName}</p>
                 </div>
+              </Col>
+              <Col xs={12} style={{ padding: '0.8rem'}}>
+                <Button variant="success" block className="mt-3">
+                  Edit
+                </Button>
+                <Button variant="danger" block className="mt-3">
+                  Delete
+                </Button>
               </Col>
             </Fragment>
           )}
