@@ -1,11 +1,14 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { Button, Card, ListGroup, Col } from 'react-bootstrap';
 
 import './Post.css';
 
 const post = props => {
-  const { title, description, author } = props.post;
+  const { postId, post } = props;
+  const { title, author } = post;
   const { displayName, photoURL, email } = author;
+
   return (
     <Col xs={12} md={6} lg={4} className="mb-4">
       <Card className="post">
@@ -21,7 +24,9 @@ const post = props => {
             </div>
           </ListGroup.Item>
           <ListGroup.Item>
-            <Button variant="primary" block>Read more</Button>
+            <Button variant="primary" block onClick={() => props.history.push(`/show?id=${postId}`)} >
+              Read more
+            </Button>
           </ListGroup.Item>
         </ListGroup>
       </Card>
@@ -29,4 +34,4 @@ const post = props => {
   )
 }
 
-export default post;
+export default withRouter(post);

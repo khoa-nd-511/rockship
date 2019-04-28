@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { withFormik, Field } from 'formik';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import renderHtml from 'react-render-html';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 

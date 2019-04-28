@@ -37,7 +37,7 @@ export default () => {
             <Col xs={12}><p>{message}</p></Col>
             {Object.keys(posts).length > 0 && (
               Object.keys(posts).map(k => (
-                <Post key={k} post={posts[k]} />
+                <Post key={k} postId={k} post={posts[k]} />
               ))
             )}
           </Fragment>
