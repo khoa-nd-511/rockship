@@ -4,8 +4,8 @@ import { Button, Card, ListGroup, Col } from 'react-bootstrap';
 import './Post.css';
 
 const post = props => {
-  const { title, description } = props.post;
-
+  const { title, description, author } = props.post;
+  const { displayName, photoURL, email } = author;
   return (
     <Col xs={12} md={6} lg={4} className="mb-4">
       <Card className="post">
@@ -16,8 +16,8 @@ const post = props => {
         <ListGroup className="list-group-flush">
           <ListGroup.Item>
             <div className="chip">
-              <img src="https://lh5.googleusercontent.com/-UZT5GSUGLd4/AAAAAAAAAAI/AAAAAAAAA-A/I_aPa22vfq4/photo.jpg" alt="asd" />
-              <a href="!#">Khoa Nguyen</a>
+              <img src={photoURL} alt={displayName} />
+              <a href={`mailto:${email}`}>{displayName}</a>
             </div>
           </ListGroup.Item>
           <ListGroup.Item>
