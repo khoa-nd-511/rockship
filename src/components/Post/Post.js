@@ -5,7 +5,7 @@ import './Post.css';
 
 const post = props => {
   const { title, description } = props.post;
-  console.log(props.post)
+
   return (
     <Col xs={4} className="mb-4">
       <Card className="post">

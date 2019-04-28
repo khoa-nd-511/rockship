@@ -34,7 +34,7 @@ export class Layout extends Component {
               {this.props.children}
             </Row>
           </Container>
-          <Sidedrawer showSidedrawer={showSidedrawer} />
+          <Sidedrawer showSidedrawer={showSidedrawer} closeSidedrawerHandler={this.closeSidedrawerHandler} />
           <Backdrop showSidedrawer={showSidedrawer} clodeSidedrawer={this.closeSidedrawerHandler} />
         </div>
       </Fragment>
