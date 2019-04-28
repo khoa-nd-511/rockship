@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import * as _ from 'lodash';
 
 import Button from 'react-bootstrap/Button';
 
@@ -44,8 +45,9 @@ class Auth extends Component {
   componentDidMount = () => [
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log(user)
         this.setState({ user, loggedIn: true })
+        const currentUser = _.pick(user, ['displayName', 'photoURL', 'email', 'uid']);
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
       }
     })
   ]

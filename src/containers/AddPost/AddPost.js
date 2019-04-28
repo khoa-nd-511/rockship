@@ -57,7 +57,7 @@ export class AddPost extends Component {
                           form.setFieldValue('body', e)
                         }}
                         placeholder="Write something..."
-                        value={ form.status && form.status.success ? '' : this.state.body}
+                        value={form.status && form.status.success ? '' : this.state.body}
                         formats={AddPost.formats}
                         modules={AddPost.modules}
                       />
@@ -116,9 +116,10 @@ export default withFormik({
   },
 
   handleSubmit: (values, { resetForm, setStatus }) => {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     fetch('https://rockship-adbe4.firebaseio.com/posts.json', {
       method: 'POST',
-      body: JSON.stringify(values),
+      body: JSON.stringify({ ...values, author: currentUser }),
       headers: { 'Content-Type': 'application/json' }
     }).then(data => data.json()).then(res => {
       setStatus({ success: true })
