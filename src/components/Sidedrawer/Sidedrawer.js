@@ -17,12 +17,12 @@ const sidedrawer = props => {
               Dashboard
             </ListGroup.Item>
           </NavLink>
-          <NavLink className="navLink" to="posts">
+          <NavLink className="navLink" to="/posts">
             <ListGroup.Item className="navLink_item">
               Your Posts
             </ListGroup.Item>
           </NavLink>
-          <NavLink className="navLink" to="add">
+          <NavLink className="navLink" to="/add">
             <ListGroup.Item className="navLink_item">
               Add Post
             </ListGroup.Item>

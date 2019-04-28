@@ -28,7 +28,7 @@ export class Layout extends Component {
     return (
       <Fragment>
         <Header toggleSidedrawer={this.showSidedrawerHandler} showSidedrawer={showSidedrawer} />
-        <div>
+        <div style={{ marginTop: '2rem' }}>
           <Container>
             <Row>
               {this.props.children}

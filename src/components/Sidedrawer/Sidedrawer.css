@@ -1,5 +1,6 @@
 .sidedrawer {
   position: absolute;
+  top: 72px;
   width: 300px;
   height: calc(100% - 72px);
   background: #fff;
