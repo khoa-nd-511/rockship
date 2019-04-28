@@ -17,7 +17,8 @@ class PostDisplay extends Component {
   }
 
   render() {
-    const { title, body, authorName, } = this.props
+    const { title, body, postId, authorName, authorEmail } = this.props;
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
     return (
       <Fragment>
@@ -35,15 +36,16 @@ class PostDisplay extends Component {
             <p>{authorName}</p>
           </div>
         </Col>
-        <Col xs={12} style={{ padding: '0.8rem' }}>
-          <Button variant="success" block className="mt-3">
-            Edit
+        {(!currentUser || authorEmail === currentUser.email) && (
+          <Col xs={12} style={{ padding: '0.8rem' }}>
+            <Button variant="success" block className="mt-3">
+              Edit
           </Button>
-          <Button
-            variant="danger"
-            block className="mt-3"
-            onClick={() => this.setState({ show: true })}>
-            Delete
+            <Button
+              variant="danger"
+              block className="mt-3"
+              onClick={() => this.setState({ show: true })}>
+              Delete
           </Button>
         </Col>
         <SweetAlert show={this.state.show} title="Delete this post" text="Are you sure?" confirm={() => console.log('Deleting')} />
