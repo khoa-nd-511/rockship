@@ -10,8 +10,7 @@ const fetchPosts = pipe(
   switchMap(_ => ajax('https://rockship-adbe4.firebaseio.com/posts.json').pipe(
     map(data => data.response),
     map(res => {
-      Object.keys(res)
-      if (Object.keys(res) === 0) {
+      if (!res || Object.keys(res) === 0) {
         return {
           posts: [],
           message: 'No posts at the moment'
