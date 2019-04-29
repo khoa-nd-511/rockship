@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-
+import { Link } from 'react-router-dom';
 import { Table, Col } from 'react-bootstrap';
 import { pipe } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
@@ -30,6 +30,7 @@ const fetchMyPosts = pipe(
 const MyPosts = streamProps(fetchMyPosts);
 
 const currentUsers = JSON.parse(localStorage.getItem('currentUser'));
+console.log(currentUsers)
 
 export default () => (
   <MyPosts authorId={currentUsers.uid}>
@@ -43,16 +44,18 @@ export default () => (
               <tr>
                 <th>#</th>
                 <th>Title</th>
-                <th>Actions</th>
+                <th>Created At</th>
               </tr>
             </thead>
             <tbody>
               {myPosts.length > 0 ? (
                 myPosts.map(p => (
                   <tr key={p.postId}>
-                    <td>1</td>
-                    <td>{p.title}</td>
-                    <td>actions</td>
+                    <td>{myPosts.indexOf(p) + 1}</td>
+                    <td>
+                      <Link to={`/show?id=${p.postId}`}>{p.title}</Link>
+                    </td>
+                    <td>{p.createdAt}</td>
                   </tr>
                 ))
               ) : null}
