@@ -36,7 +36,7 @@ const Auth = props => {
         context.logIn(currentUser)
       }
     })
-  }, [context]);
+  }, [context.isLoggedIn]);
 
 
   const logoutHandler = () => {
