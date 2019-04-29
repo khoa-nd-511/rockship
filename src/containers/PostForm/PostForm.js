@@ -5,9 +5,9 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-import './AddPost.css';
+import './PostForm.css';
 
-export class AddPost extends Component {
+export class PostForm extends Component {
   state = {
     body: ''
   };
@@ -23,6 +23,14 @@ export class AddPost extends Component {
     }
   }
 
+  componentDidMount = () => {
+    const { body } = this.props.values;
+
+    if (body !== '') {
+      this.setState({ body })
+    }
+  }
+
   render() {
     const {
       values,
@@ -31,7 +39,9 @@ export class AddPost extends Component {
       handleChange,
       handleBlur,
       handleSubmit,
-      status
+      status,
+      showEditForm,
+      cancelEdit
     } = this.props;
 
     return (
@@ -66,8 +76,8 @@ export class AddPost extends Component {
                         }}
                         placeholder="Write something..."
                         value={this.state.body}
-                        formats={AddPost.formats}
-                        modules={AddPost.modules}
+                        formats={PostForm.formats}
+                        modules={PostForm.modules}
                       />
                       {errors.body && touched.body && <div id="feedback">{errors.body}</div>}
                     </Fragment>
@@ -76,8 +86,8 @@ export class AddPost extends Component {
 
               </Form.Group>
               <Button variant="primary" type="submit">Submit</Button>
+              {showEditForm && <Button variant="info" type="button" onClick={cancelEdit}>Cancel</Button>}
             </Form>
-
           </Col>
         </Row>
       </Container >
@@ -85,7 +95,7 @@ export class AddPost extends Component {
   }
 }
 
-AddPost.modules = {
+PostForm.modules = {
   toolbar: [
     [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
     [{ size: [] }],
@@ -99,7 +109,7 @@ AddPost.modules = {
   ],
 }
 
-AddPost.formats = [
+PostForm.formats = [
   'header', 'font', 'size',
   'bold', 'italic', 'underline',
   'list', 'bullet', 'indent',
@@ -136,4 +146,4 @@ export default withFormik({
   },
 
   displayName: 'Add Post Form',
-})(AddPost);
+})(PostForm);

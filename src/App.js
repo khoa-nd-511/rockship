@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Layout from './containers/Layout/Layout';
 import Dashboard from './containers/Dashboard/Dashboard';
-import AddPost from './containers/AddPost/AddPost';
+import PostForm from './containers/PostForm/PostForm';
 import Show from './containers/Show/Show';
 
 
@@ -13,7 +13,7 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Switch>
-          <Route exact path="/add" component={AddPost} />
+          <Route exact path="/add" component={PostForm} />
           <Route exact path="/show" component={Show} />
           <Route exact path="/" component={Dashboard} />
         </Switch>
