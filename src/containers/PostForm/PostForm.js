@@ -6,8 +6,11 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 import './PostForm.css';
+import AuthContext from '../../context/authContext';
 
 export class PostForm extends Component {
+  static contextType = AuthContext;
+
   state = {
     body: ''
   };
@@ -15,13 +18,6 @@ export class PostForm extends Component {
   bodyChangedHandler = (html) => {
     this.setState({ body: html })
   };
-
-  componentWillMount = () => {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (!currentUser) {
-      this.props.history.push('/')
-    }
-  }
 
   componentDidMount = () => {
     const { body } = this.props.values;
@@ -46,7 +42,7 @@ export class PostForm extends Component {
 
     return (
       <Container>
-        {status && <Redirect to="/" />}
+        {(status || !this.context.isLoggedIn) && <Redirect to="/" />}
         <Row className="justify-content-center">
           <Col xs={8}>
             <Form onSubmit={handleSubmit}>
