@@ -44,7 +44,8 @@ class PostDisplay extends Component {
   }
 
   render() {
-    const { title, body, postId, authorName, authorEmail } = this.props;
+    const { postId } = this.props;
+    const { title, body, author } = this.props.post;
     const { showSwal, swalTitle, swalText, type, method, showPostForm } = this.state;
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -62,10 +63,10 @@ class PostDisplay extends Component {
           <Col xs={12} lg={4} className="mt-3 ml-auto">
             <div style={paper}>
               <h4><b>Author</b></h4>
-              <p>{authorName}</p>
+              <p>{author.displayName}</p>
             </div>
           </Col>
-          {(!currentUser || authorEmail === currentUser.email) && (
+          {(!currentUser || author.email === currentUser.email) && (
             <Fragment>
               <Col xs={12} style={{ padding: '0.8rem' }}>
                 <Button variant="success" block className="mt-3" onClick={() => this.setState({ showPostForm: true })}>
@@ -96,7 +97,7 @@ class PostDisplay extends Component {
           onSubmit={(values) => {
             fetch(`https://rockship-adbe4.firebaseio.com/posts/${postId}.json`, {
               method: 'PUT',
-              body: JSON.stringify({ ...values, author: currentUser, authorId: currentUser.uid }),
+              body: JSON.stringify({ ...this.props.post, ...values }),
               headers: { 'Content-Type': 'application/json' }
             }).then(data => data.json()).then(res => {
               if (typeof (res) === 'object') {

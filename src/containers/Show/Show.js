@@ -37,11 +37,9 @@ export default () => {
           {message !== '' && <Col xs={12}>{message}</Col>}
           {post && (
             <PostDisplay
-            postId={postId}
-            title={post.title}
-            body={post.body}
-            authorEmail={post.author.email}
-            authorName={post.author.displayName} />
+              post={post}
+              postId={postId}
+            />
           )}
         </Fragment>
       )}
