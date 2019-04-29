@@ -4,15 +4,13 @@ import { Table, Col } from 'react-bootstrap';
 import { pipe } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { streamProps } from 'react-streams';
-import { startWith, map, switchMap, tap } from 'rxjs/operators';
-import * as _ from 'lodash';
+import { startWith, map, switchMap, } from 'rxjs/operators';
 
 const fetchMyPosts = pipe(
   switchMap(({ authorId }) => ajax(`https://rockship-adbe4.firebaseio.com/posts.json?orderBy="authorId"&equalTo="${authorId}"`).pipe(
     map(data => data.response),
-    tap(console.log),
     map(res => {
-      const myPosts = Object.keys(res).map(k => res[k]);
+      const myPosts = Object.keys(res).map(k => ({ ...res[k], postId: k }));
 
       if (myPosts.length === 0) {
         return {
@@ -35,19 +33,34 @@ const currentUsers = JSON.parse(localStorage.getItem('currentUser'));
 
 export default () => (
   <MyPosts authorId={currentUsers.uid}>
+
     {({ myPosts, message }) => {
       return (
         <Fragment>
           <Col xs={12}>{message}</Col>
-          <Col xs={12}>
-            {myPosts.length > 0 ? (
-              myPosts.map(p => (
-                JSON.stringify(p)
-              ))
-            ) : null}
-          </Col>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {myPosts.length > 0 ? (
+                myPosts.map(p => (
+                  <tr key={p.postId}>
+                    <td>1</td>
+                    <td>{p.title}</td>
+                    <td>actions</td>
+                  </tr>
+                ))
+              ) : null}
+            </tbody>
+          </Table>
         </Fragment>
       )
     }}
+
   </MyPosts>
 )

@@ -137,7 +137,7 @@ export default withFormik({
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     fetch('https://rockship-adbe4.firebaseio.com/posts.json', {
       method: 'POST',
-      body: JSON.stringify({ ...values, author: currentUser }),
+      body: JSON.stringify({ ...values, author: currentUser, authorId: currentUser.uid }),
       headers: { 'Content-Type': 'application/json' }
     }).then(data => data.json()).then(res => {
       setStatus({ success: true })
