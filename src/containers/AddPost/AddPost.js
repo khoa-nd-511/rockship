@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react';
+import { Redirect } from 'react-router-dom';
 import { withFormik, Field } from 'formik';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import ReactQuill from 'react-quill';
@@ -30,13 +31,14 @@ export class AddPost extends Component {
       handleChange,
       handleBlur,
       handleSubmit,
+      status
     } = this.props;
 
     return (
       <Container>
+        {status && <Redirect to="/" />}
         <Row className="justify-content-center">
           <Col xs={8}>
-
             <Form onSubmit={handleSubmit}>
               <Form.Group>
                 <Form.Label>Title</Form.Label>
@@ -63,7 +65,7 @@ export class AddPost extends Component {
                           form.setFieldValue('body', e)
                         }}
                         placeholder="Write something..."
-                        value={form.status && form.status.success ? '' : this.state.body}
+                        value={this.state.body}
                         formats={AddPost.formats}
                         modules={AddPost.modules}
                       />

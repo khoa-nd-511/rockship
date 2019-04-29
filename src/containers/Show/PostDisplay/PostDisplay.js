@@ -2,8 +2,7 @@ import React, { Fragment, Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import renderHtml from 'react-render-html';
 import { Col, Button } from 'react-bootstrap';
-import SweetAlert from 'sweetalert-react';
-import 'sweetalert/dist/sweetalert.css';
+import Swal from '../../../components/Swal/Swal';
 
 const paper = {
   boxShadow: '1px 1px 1px rgba(0,0,0,0.1)',
@@ -15,14 +14,31 @@ const paper = {
 
 class PostDisplay extends Component {
   state = {
-    show: false,
+    showSwal: false,
     swalTitle: '',
-    swalText: ''
+    swalText: '',
+    type: '',
+    method: ''
+  }
+
+  closeSwal = () => {
+    this.setState({ showSwal: false })
+  }
+
+  confirmHandler = (method, postId) => {
+    if (method === "DELETE") {
+      fetch(`https://rockship-adbe4.firebaseio.com/posts/${postId}.json`, {
+        method
+      }).then(data => data.json()).then(res => {
+        this.closeSwal()
+        this.props.history.push('/')
+      }).catch(err => console.log(err))
+    }
   }
 
   render() {
     const { title, body, postId, authorName, authorEmail } = this.props;
-    const { showSwal, swalTitle, swalText } = this.state;
+    const { showSwal, swalTitle, swalText, type, method } = this.state;
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
     return (
@@ -49,28 +65,19 @@ class PostDisplay extends Component {
             <Button
               variant="danger"
               block className="mt-3"
-              onClick={() => this.setState({ showSwal: true, swalTitle: "Delete this post", swalText: "Are you sure?" })}>
+              onClick={() => this.setState({ showSwal: true, swalTitle: "Delete this post", swalText: "Are you sure?", method: "DELETE", type: "warning" })}>
               Delete
           </Button>
           </Col>
         )}
-        <SweetAlert
-          show={showSwal}
-          title={swalTitle}
-          text={swalText}
-          showCancelButton
-          type="warning"
-          onEscapeKey={() => this.setState({ showSwal: false })}
-          onOutsideClick={() => this.setState({ showSwal: false })}
-          onCancel={() => this.setState({ showSwal: false })}
-          onConfirm={() => {
-            fetch(`https://rockship-adbe4.firebaseio.com/posts/${postId}.json`, {
-              method: 'DELETE'
-            }).then(data => data.json()).then(res => {
-              this.setState({ showSwal: false });
-              this.props.history.push('/')
-            }).catch(err => console.log(err))
-          }}
+        <Swal
+          showSwal={showSwal}
+          swalTitle={swalTitle}
+          swalText={swalText}
+          type={type}
+          method={method}
+          closeHandler={this.closeSwal}
+          confirm={() => this.confirmHandler(method, postId)}
         />
       </Fragment>
     )
