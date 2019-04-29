@@ -15,7 +15,7 @@ const sidedrawer = props => {
       exact: true
     },
     {
-      path: '/posts',
+      path: '/my-posts',
       label: 'Your Posts',
     },
     {

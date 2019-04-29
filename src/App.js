@@ -6,6 +6,7 @@ import Layout from './containers/Layout/Layout';
 import Dashboard from './containers/Dashboard/Dashboard';
 import PostForm from './containers/PostForm/PostForm';
 import Show from './containers/Show/Show';
+import MyPosts from './containers/MyPosts/MyPosts';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Switch>
           <Route exact path="/add" component={PostForm} />
           <Route exact path="/show" component={Show} />
+          <Route exact path="/my-posts" component={MyPosts} />
           <Route exact path="/" component={Dashboard} />
         </Switch>
       </Layout>
