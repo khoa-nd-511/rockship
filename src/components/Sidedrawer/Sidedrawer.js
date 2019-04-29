@@ -1,28 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+
+import AuthContext from '../../context/authContext';
 import { ListGroup } from 'react-bootstrap';
-
-import './Sidedrawer.css'
 import Auth from '../../containers/Auth/Auth';
+import './Sidedrawer.css'
 
-const sidedrawer = props => {
+const Sidedrawer = props => {
   const { showSidedrawer, closeSidedrawerHandler } = props;
+  const context = useContext(AuthContext)
 
-  const listItemArr = [
-    {
-      path: '/',
-      label: 'Dashboard',
-      exact: true
-    },
-    {
-      path: '/my-posts',
-      label: 'Your Posts',
-    },
-    {
-      path: '/add',
-      label: 'Add Post',
-    },
-  ];
+  const listItemArr = context.isLoggedIn
+    ? [{ path: '/', label: 'Dashboard', exact: true }, { path: '/posts', label: 'Your Posts', }, { path: '/add', label: 'Add Post', },]
+    : [{ path: '/', label: 'Dashboard', exact: true }];
 
   const listItems = listItemArr.map(({ path, label, exact }) => (
     <NavLink
@@ -51,4 +41,4 @@ const sidedrawer = props => {
   )
 }
 
-export default sidedrawer
+export default Sidedrawer
