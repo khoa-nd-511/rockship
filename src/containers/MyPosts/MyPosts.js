@@ -30,7 +30,6 @@ const fetchMyPosts = pipe(
 const MyPosts = streamProps(fetchMyPosts);
 
 const currentUsers = JSON.parse(localStorage.getItem('currentUser'));
-console.log(currentUsers)
 
 export default () => (
   <MyPosts authorId={currentUsers.uid}>
