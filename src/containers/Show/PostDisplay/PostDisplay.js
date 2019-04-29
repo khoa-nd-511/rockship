@@ -1,4 +1,5 @@
 import React, { Fragment, Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import renderHtml from 'react-render-html';
 import { Col, Button } from 'react-bootstrap';
 import SweetAlert from 'sweetalert-react';
@@ -9,15 +10,19 @@ const paper = {
   borderRadius: '0.5rem',
   border: '1px solid rgba(0,0,0,0.1)',
   padding: '0.8rem',
+  wordBreak: 'break-all',
 }
 
 class PostDisplay extends Component {
   state = {
-    show: false
+    show: false,
+    swalTitle: '',
+    swalText: ''
   }
 
   render() {
     const { title, body, postId, authorName, authorEmail } = this.props;
+    const { showSwal, swalTitle, swalText } = this.state;
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
     return (
@@ -44,14 +49,32 @@ class PostDisplay extends Component {
             <Button
               variant="danger"
               block className="mt-3"
-              onClick={() => this.setState({ show: true })}>
+              onClick={() => this.setState({ showSwal: true, swalTitle: "Delete this post", swalText: "Are you sure?" })}>
               Delete
           </Button>
-        </Col>
-        <SweetAlert show={this.state.show} title="Delete this post" text="Are you sure?" confirm={() => console.log('Deleting')} />
+          </Col>
+        )}
+        <SweetAlert
+          show={showSwal}
+          title={swalTitle}
+          text={swalText}
+          showCancelButton
+          type="warning"
+          onEscapeKey={() => this.setState({ showSwal: false })}
+          onOutsideClick={() => this.setState({ showSwal: false })}
+          onCancel={() => this.setState({ showSwal: false })}
+          onConfirm={() => {
+            fetch(`https://rockship-adbe4.firebaseio.com/posts/${postId}.json`, {
+              method: 'DELETE'
+            }).then(data => data.json()).then(res => {
+              this.setState({ showSwal: false });
+              this.props.history.push('/')
+            }).catch(err => console.log(err))
+          }}
+        />
       </Fragment>
     )
   }
 }
 
-export default PostDisplay;
+export default withRouter(PostDisplay);
