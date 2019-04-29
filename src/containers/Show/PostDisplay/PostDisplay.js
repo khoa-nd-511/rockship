@@ -96,7 +96,7 @@ class PostDisplay extends Component {
           onSubmit={(values) => {
             fetch(`https://rockship-adbe4.firebaseio.com/posts/${postId}.json`, {
               method: 'PUT',
-              body: JSON.stringify({ ...values, author: currentUser }),
+              body: JSON.stringify({ ...values, author: currentUser, authorId: currentUser.uid }),
               headers: { 'Content-Type': 'application/json' }
             }).then(data => data.json()).then(res => {
               if (typeof (res) === 'object') {
