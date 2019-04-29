@@ -1,68 +1,39 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Khoa's test project for Rockship
 
-## Available Scripts
+### How to run on local
 
-In the project directory, you can run:
+- **Step 1**: Clone or download to your machine
+- **Step 2**: In the project directory, run `npm start`
 
-### `npm start`
+### What I did for the projects
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Authentication**: 
+    - I enable and use Google authentication instead of the regular signing up with email and password because I have done that in another project of mine. Therefore, I this time want to try something new
+    - And also, Google gives back a nice set of data so I can display them nicely.
+- **State management**: 
+    - State management in this project is not so big and complicated ( just wanting to see if user is logged in or not ) so I choose to use the new feature from React 16.8, which is Hooks instead of Redux.
+    - This feature is really powerful, you can make almost or may the intire app to use only functional component with useContext, useReducer, useState, etc.
+- **Asynchonous**: 
+    - I use the Javascript's fetch to handle api calls.
+    - However I also use the library called `react-streams` which is built on top of `rxjs`. Because I've recently learnt RxJS so I want to try it in this project. Check it out in `Show.js`, `Dashboard.js` or `MyPosts.js`.
+    - What I have there is just some basics, `RxJS` and `react-streams` still have a lot more cooler stuff. Will definitely learn them more in the future :)
+- **Form and WYSIWGY**: 
+    - Normally I create forms from scratch, but in this project I use `Formik` as a form handler and `react-quill` for the body of the post as the required.
+- **Router**: 
+    - I use `react-router-dom` for handling routes.
+    - `react-router-dom` has the nice `NavLink` which will give me some properties when they are active and stuff.
+- **Other**:
+    - `Bootstrap` for UI
+    - `SweetAlert` for confirmation before delete Post
+    - `lodash` for working with object
+    - `react-firebaseui` for the nice Log in with Google` button
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### **What I want to do more for this project**:
+- Form validation
+- I didn't render a spinner or disable the button (again I've done this in my other projects) when create a post or edit a post or delete a post, user will click multiple times which will make multiple api calls. What I want to do to prevent this in this project is using RxJS with the `exhaustMap` operator. However I did not success doing that :(
+- Better UI and animations (maybe)
+ 
+### **Deployment**
+###### I deploy the project with `Firebase`
+###### Check it out at [Rockship](https://rockship-adbe4.firebaseapp.com/)
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
