@@ -11,7 +11,7 @@ const Sidedrawer = props => {
   const context = useContext(AuthContext)
 
   const listItemArr = context.isLoggedIn
-    ? [{ path: '/', label: 'Dashboard', exact: true }, { path: '/posts', label: 'Your Posts', }, { path: '/add', label: 'Add Post', },]
+    ? [{ path: '/', label: 'Dashboard', exact: true }, { path: '/my-posts', label: 'Your Posts', }, { path: '/add', label: 'Add Post', },]
     : [{ path: '/', label: 'Dashboard', exact: true }];
 
   const listItems = listItemArr.map(({ path, label, exact }) => (
