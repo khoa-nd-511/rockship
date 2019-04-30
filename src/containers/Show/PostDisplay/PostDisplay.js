@@ -66,7 +66,7 @@ class PostDisplay extends Component {
               <p>{author.displayName}</p>
             </div>
           </Col>
-          {(!currentUser || author.email === currentUser.email) && (
+          {(currentUser && author.email === currentUser.email) && (
             <Fragment>
               <Col xs={12} style={{ padding: '0.8rem' }}>
                 <Button variant="success" block className="mt-3" onClick={() => this.setState({ showPostForm: true })}>
