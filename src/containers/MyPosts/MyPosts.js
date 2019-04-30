@@ -1,39 +1,45 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { Table, Col } from 'react-bootstrap';
-import { pipe } from 'rxjs';
-import { ajax } from 'rxjs/ajax';
-import { streamProps } from 'react-streams';
-import { startWith, map, switchMap, } from 'rxjs/operators';
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
+import { Table, Col } from "react-bootstrap";
+import { ajax } from "rxjs/ajax";
+import { streamProps } from "react-streams";
+import { map, switchMap, startWith } from "rxjs/operators";
 
-const fetchMyPosts = pipe(
-  switchMap(({ authorId }) => ajax(`https://rockship-adbe4.firebaseio.com/posts.json?orderBy="authorId"&equalTo="${authorId}"`).pipe(
-    map(data => data.response),
-    map(res => {
-      const myPosts = Object.keys(res).map(k => ({ ...res[k], postId: k }));
+const MyPosts = streamProps(props$ => {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-      if (myPosts.length === 0) {
-        return {
-          message: `No posts at the moment. Please add some.`
-        }
-      }
+  return props$.pipe(
+    switchMap(_ =>
+      ajax(
+        `https://rockship-adbe4.firebaseio.com/posts.json?orderBy="authorId"&equalTo="${
+          currentUser.uid
+        }"`
+      ).pipe(
+        map(data => data.response),
+        map(res => {
+          const myPosts = Object.keys(res).map(k => ({ ...res[k], postId: k }));
 
-      return {
-        myPosts,
-        message: `Successfully fetched ${myPosts.length} posts from ${myPosts[0].author.displayName}`
-      }
-    }),
-  )),
-  startWith({ myPosts: [], message: 'Fetching...' })
-)
+          if (myPosts.length === 0) {
+            return {
+              message: `No posts at the moment. Please add some.`
+            };
+          }
 
-const MyPosts = streamProps(fetchMyPosts);
-
-const currentUsers = JSON.parse(localStorage.getItem('currentUser'));
+          return {
+            myPosts,
+            message: `Successfully fetched ${myPosts.length} posts from ${
+              myPosts[0].author.displayName
+            }`
+          };
+        })
+      )
+    ),
+    startWith({ message: "Fetching...", myPosts: [] })
+  );
+});
 
 export default () => (
-  <MyPosts authorId={currentUsers.uid}>
-
+  <MyPosts>
     {({ myPosts, message }) => {
       return (
         <Fragment>
@@ -47,22 +53,21 @@ export default () => (
               </tr>
             </thead>
             <tbody>
-              {myPosts.length > 0 ? (
-                myPosts.map(p => (
-                  <tr key={p.postId}>
-                    <td>{myPosts.indexOf(p) + 1}</td>
-                    <td>
-                      <Link to={`/show?id=${p.postId}`}>{p.title}</Link>
-                    </td>
-                    <td>{p.createdAt}</td>
-                  </tr>
-                ))
-              ) : null}
+              {myPosts.length > 0
+                ? myPosts.map(p => (
+                    <tr key={p.postId}>
+                      <td>{myPosts.indexOf(p) + 1}</td>
+                      <td>
+                        <Link to={`/show?id=${p.postId}`}>{p.title}</Link>
+                      </td>
+                      <td>{p.createdAt}</td>
+                    </tr>
+                  ))
+                : null}
             </tbody>
           </Table>
         </Fragment>
-      )
+      );
     }}
-
   </MyPosts>
-)
+);
