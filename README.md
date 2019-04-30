@@ -5,7 +5,13 @@
 - **Step 1**: Clone or download to your machine
 - **Step 2**: In the project directory, run `npm start`
 
-### What I did for the projects
+### What the project can do
+- Go to Dashboard to see posts from all users
+- Sign in with Google
+- Once signed in, users can add, edit or delete their posts
+- Users can only see Edit and Delete buttons the post is theirs.
+
+### What I did for the project
 
 - **Authentication**: 
     - I enable and use Google authentication instead of the regular signing up with email and password because I have done that in another project of mine. Therefore, I this time want to try something new
