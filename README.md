@@ -9,7 +9,7 @@
 - Go to Dashboard to see posts from all users
 - Sign in with Google
 - Once signed in, users can add, edit or delete their posts
-- Users can only see Edit and Delete buttons the post is theirs.
+- Users can only see Edit and Delete buttons if the post is theirs.
 
 ### What I did for the project
 
@@ -32,7 +32,7 @@
     - `Bootstrap` for UI
     - `SweetAlert` for confirmation before delete Post
     - `lodash` for working with object
-    - `react-firebaseui` for the nice Log in with Google` button
+    - `react-firebaseui` for the nice Log in with Google button
 
 ### **What I want to do more for this project**:
 - Form validation
